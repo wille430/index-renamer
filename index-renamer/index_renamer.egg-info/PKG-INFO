@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: index-renamer
-Version: 0.0.1
+Version: 0.0.2
 Summary: Recursively rename files names "index" to its parents name
 Home-page: https://github.com/wille430/index-renamer
 Author: William Wigemo
