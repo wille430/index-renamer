@@ -1,8 +1,6 @@
-
-
 import os
 import re
-import sys
+import click
 
 def get_abs_path(path: str) -> str:
     if os.path.isabs(path):
@@ -21,18 +19,17 @@ def rename_in_dirs(dir_path: str):
 
             if (file_ext):
                 # rename index to folder name
-                print(f'Renaming {dir} to {parent_dir}{file_ext[0]}')
+                new_filename = f'{parent_dir}{file_ext[0]}'
+                print(f'Renaming {dir} to {new_filename}')
+                os.rename(full_dir, os.path.join(dir_path, new_filename))
         else:
             rename_in_dirs(full_dir)
 
-    
-
-def main():
-    args = sys.argv[1:]
-    dir_path = get_abs_path(args[0])
-
-    rename_in_dirs(dir_path)
-    
+@click.command()
+@click.option('--dir', default=os.path.join(__file__), help='Which directory to recursively rename files named index')
+def main(dir):
+    rename_in_dirs(dir)
+    print('DONE')
 
 if (__name__ == '__main__'):
     main()
